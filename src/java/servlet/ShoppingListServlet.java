@@ -38,7 +38,7 @@ public class ShoppingListServlet extends HttpServlet {
         }else{
             listItems = (ArrayList<String>)request.getSession().getAttribute("listItems");
         }
-        
+        //register 
         if (request.getParameter("action").equals("register")) {
             if (request.getParameter("username") != null && !request.getParameter("username").isEmpty()) {
                 request.getSession().setAttribute("username", request.getParameter("username"));
@@ -46,9 +46,22 @@ public class ShoppingListServlet extends HttpServlet {
             } else {
                 getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
             }
+          //add button
+        } else if (request.getParameter("action").equals("add"))  {
+            if(request.getParameter("item") != null && !request.getParameter("item").isEmpty()){
+                listItems.add(request.getParameter("item"));//add item
+                request.getSession().setAttribute("listItems", listItems);//set attribute 
+                getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
+            }else{
+                request.setAttribute("message", "Enter Name of the item to add on the list");
+                getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
+            }
+        }
+            
+            
         
         getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
-    }
+    
 
     }
 }

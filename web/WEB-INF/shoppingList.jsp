@@ -25,12 +25,15 @@
         <br>
         <form action="" method="post">
             <table>
-                <tr>
-                    <c:forEach items="${listItems}" var="itemO">
-                    <td><input type="radio" name="item" value="itemName">${listItems}</li>
+                
+                    <c:forEach items="${listItems}" var="itemName">
+                    <tr>
+                    <td><input type="radio" name="item" value="${itemName}">${itemName}</td>
+                    </tr>  
                     </c:forEach>
-                </tr>   
+                
             </table>
+            <br>
             <input type="hidden" name="action" value="delete">
             <c:if test="${listItems.size() > 0}">
                  <input type="submit" value="Delete">

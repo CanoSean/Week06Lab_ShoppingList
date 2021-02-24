@@ -56,10 +56,16 @@ public class ShoppingListServlet extends HttpServlet {
                 request.setAttribute("message", "Enter Name of the item to add on the list");
                 getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
             }
+        }else if(request.getParameter("action").equals("delete")){
+            String itemDel = request.getParameter("item");
+            ArrayList<String> tmp = new ArrayList<>(listItems);
+            for (String i : tmp) {
+                if (itemDel.equals(i)) {
+                    listItems.remove(listItems.indexOf(i));
+                    break;
+                }
         }
-            
-            
-        
+        }
         getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
     
 
